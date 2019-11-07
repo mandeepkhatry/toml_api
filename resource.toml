@@ -1,31 +1,31 @@
 [schema]
-[user]
+[schema.user]
 "name" = "string"
 "age" = "int"
 "weight" = "double"
 
-[father]
+[schema.father]
 "file" = "father.toml"
 "schema" = "father"
 
-[mother]
+[schema.mother]
 "file" = "mother.toml"
 "schema" = "mother"
 
 [validator]
-[[name]]
+[[validator.name]]
 "field" = "name"
 "type" = "string.min_length"
 "value" = "2"
 "error" = “Minimum required length is $value”
 
-[[name]]
+[[validator.name]]
 "field" = "name"
 "type" = "string.max_length"
 "value" = 50
 "error" = “Maximum required length is $value”
 
-[[age]]
+[[validator.age]]
 "field" = "age"
 "type" = "int.min_value"
 "value" = 18
