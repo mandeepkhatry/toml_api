@@ -1,0 +1,134 @@
+[schema]
+[user]
+"name" = "string"
+"age" = "int"
+"weight" = "double"
+
+[father]
+"file" = "father.toml"
+"schema" = "father"
+
+[mother]
+"file" = "mother.toml"
+"schema" = "mother"
+
+[validator]
+[[name]]
+"field" = "name"
+"type" = "string.min_length"
+"value" = "2"
+"error" = “Minimum required length is $value”
+
+[[name]]
+"field" = "name"
+"type" = "string.max_length"
+"value" = 50
+"error" = “Maximum required length is $value”
+
+[[age]]
+"field" = "age"
+"type" = "int.min_value"
+"value" = 18
+"error" = “Minimum age is $value”
+
+
+[api.root]
+endpoint = “/api/:foo/:bar/:baz”
+
+[get]
+"auth" = "false"
+"query" = "$schema.user"
+"result" = "$schema.user"
+"attachments" = "[father.father, mother.father]"
+"display" = "{ "name": “User Name”, "age": “User Age” }schema"
+
+[post]
+"auth" = "false"
+"data" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[put]
+"auth" = "false"
+"data" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[patch]
+"auth" = "false"
+"schema" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[delete]
+"auth" = "false"
+"data" = "$schema.user"
+"result" = "$schema.user"
+
+
+[api.detail]
+"endpoint" = “$api.root.endpoint/:id”
+
+[get]
+"auth" = "false"
+"query" = "$schema.user"
+"display" = "{ "name": “User Name”, "age": “User Age” }"
+"attachments" = "[father.father, mother.father]"
+"result" = "$schema.user"
+
+[post]
+"auth" = "false"
+"data" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[put]
+"auth" = "false"
+"data" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[patch]
+"auth" = "false"
+"data" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[delete]
+"auth" = "false"
+"data" = "$schema.user"
+"result" = "$schema.user"
+
+[api.approve]
+"endpoint" = “$api.detail.endpoint/approve”
+
+[get]
+"auth" = "false"
+"query_params" = "$schema.user"
+"display" = "{ "name": “User Name”, "age": “User Age” }"
+"attachments" = "[father.father, mother.father]"
+"result" = "$schema.user"
+
+[post]
+auth = false
+"data" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[put]
+"auth" = "false"
+"data" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[patch]
+"auth" = "false"
+"data" = "$schema.user"
+"validator" = "[$validator.name, $validator.age]"
+"result" = "$schema.user"
+
+[delete]
+"auth" = "false"
+"data" = "$schema.user"
+"result" = "$schema.user"
+
