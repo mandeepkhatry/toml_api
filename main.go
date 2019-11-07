@@ -6,5 +6,5 @@ import (
 
 func main() {
 	resourceLocation := "resource.toml"
-	initializer.IntializeRoutes(resourceLocation)
+	initializer.InitializeRoutes(resourceLocation)
 }
