@@ -1,134 +1,144 @@
+[request]
+"auth" = "true"
+"formatter" = "default_request_formatter"
+
+[response]
+"formatter" = "default_response_formatter"
+
+[backend]
+    "plugin" = "mysql_db_plugin"
+
 [schema]
-[schema.user]
-"name" = "string"
-"age" = "int"
-"weight" = "double"
+    [schema.user]
+    "name" = "string"
+    "age" = "int"
+    "weight" = "double"
 
-[schema.father]
-"file" = "father.toml"
-"schema" = "father"
+    [schema.father]
+    "file" = "father.toml"
+    "schema" = "father"
 
-[schema.mother]
-"file" = "mother.toml"
-"schema" = "mother"
+    [schema.mother]
+    "file" = "mother.toml"
+    "schema" = "mother"
 
 [validator]
-[[validator.name]]
-"field" = "name"
-"type" = "string.min_length"
-"value" = "2"
-"error" = “Minimum required length is $value”
+    [[validator.name]]
+    "field" = "name"
+    "type" = "string.min_length"
+    "value" = "2"
+    "error" = “Minimum required length is $value”
 
-[[validator.name]]
-"field" = "name"
-"type" = "string.max_length"
-"value" = 50
-"error" = “Maximum required length is $value”
+    [[validator.name]]
+    "field" = "name"
+    "type" = "string.max_length"
+    "value" = 50
+    "error" = “Maximum required length is $value”
 
-[[validator.age]]
-"field" = "age"
-"type" = "int.min_value"
-"value" = 18
-"error" = “Minimum age is $value”
+    [[validator.age]]
+    "field" = "age"
+    "type" = "int.min_value"
+    "value" = 18
+    "error" = “Minimum age is $value”
 
 
 [api.root]
 endpoint = “/api/:foo/:bar/:baz”
 
-[get]
-"auth" = "false"
-"query" = "$schema.user"
-"result" = "$schema.user"
-"attachments" = "[father.father, mother.father]"
-"display" = "{ "name": “User Name”, "age": “User Age” }schema"
+    [api.root.get]
+    "auth" = "false"
+    "query" = "$schema.user"
+    "result" = "$schema.user"
+    "attachments" = "[father.father, mother.father]"
+    "display" = "{ "name": “User Name”, "age": “User Age” }schema"
 
-[post]
-"auth" = "false"
-"data" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+    [api.root.post]
+    "auth" = "false"
+    "data" = "$schema.user"
+    "validator" = "[$validator.name, $validator.age]"
+    "result" = "$schema.user"
 
-[put]
-"auth" = "false"
-"data" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+    [api.root.put]
+    "auth" = "false"
+    "data" = "$schema.user"
+    "validator" = "[$validator.name, $validator.age]"
+    "result" = "$schema.user"
 
-[patch]
-"auth" = "false"
-"schema" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+    [api.root.patch]
+    "auth" = "false"
+    "schema" = "$schema.user"
+    "validator" = "[$validator.name, $validator.age]"
+    "result" = "$schema.user"
 
-[delete]
-"auth" = "false"
-"data" = "$schema.user"
-"result" = "$schema.user"
+    [api.root.delete]
+    "auth" = "false"
+    "data" = "$schema.user"
+    "result" = "$schema.user"
 
 
 [api.detail]
 "endpoint" = “$api.root.endpoint/:id”
 
-[get]
-"auth" = "false"
-"query" = "$schema.user"
-"display" = "{ "name": “User Name”, "age": “User Age” }"
-"attachments" = "[father.father, mother.father]"
-"result" = "$schema.user"
+        [api.detail.get]
+        "auth" = "false"
+        "query" = "$schema.user"
+        "display" = "{ "name": “User Name”, "age": “User Age” }"
+        "attachments" = "[father.father, mother.father]"
+        "result" = "$schema.user"
 
-[post]
-"auth" = "false"
-"data" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+        [api.detail.post]
+        "auth" = "false"
+        "data" = "$schema.user"
+        "validator" = "[$validator.name, $validator.age]"
+        "result" = "$schema.user"
 
-[put]
-"auth" = "false"
-"data" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+        [api.detail.put]
+        "auth" = "false"
+        "data" = "$schema.user"
+        "validator" = "[$validator.name, $validator.age]"
+        "result" = "$schema.user"
 
-[patch]
-"auth" = "false"
-"data" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+        [api.detail.patch]
+        "auth" = "false"
+        "data" = "$schema.user"
+        "validator" = "[$validator.name, $validator.age]"
+        "result" = "$schema.user"
 
-[delete]
-"auth" = "false"
-"data" = "$schema.user"
-"result" = "$schema.user"
+        [api.detail.delete]
+        "auth" = "false"
+        "data" = "$schema.user"
+        "result" = "$schema.user"
 
 [api.approve]
 "endpoint" = “$api.detail.endpoint/approve”
 
-[get]
-"auth" = "false"
-"query_params" = "$schema.user"
-"display" = "{ "name": “User Name”, "age": “User Age” }"
-"attachments" = "[father.father, mother.father]"
-"result" = "$schema.user"
+    [api.approve.get]
+    "auth" = "false"
+    "query_params" = "$schema.user"
+    "display" = "{ "name": “User Name”, "age": “User Age” }"
+    "attachments" = "[father.father, mother.father]"
+    "result" = "$schema.user"
 
-[post]
-auth = false
-"data" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+    [api.approve.post]
+    auth = false
+    "data" = "$schema.user"
+    "validator" = "[$validator.name, $validator.age]"
+    "result" = "$schema.user"
 
-[put]
-"auth" = "false"
-"data" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+    [api.approve.put]
+    "auth" = "false"
+    "data" = "$schema.user"
+    "validator" = "[$validator.name, $validator.age]"
+    "result" = "$schema.user"
 
-[patch]
-"auth" = "false"
-"data" = "$schema.user"
-"validator" = "[$validator.name, $validator.age]"
-"result" = "$schema.user"
+    [api.approve.patch]
+    "auth" = "false"
+    "data" = "$schema.user"
+    "validator" = "[$validator.name, $validator.age]"
+    "result" = "$schema.user"
 
-[delete]
-"auth" = "false"
-"data" = "$schema.user"
-"result" = "$schema.user"
+    [api.approve.delete]
+    "auth" = "false"
+    "data" = "$schema.user"
+    "result" = "$schema.user"
 
